@@ -1,3 +1,4 @@
+/* eslint-disable function-paren-newline */
 import 'bulma/css/bulma.css';
 import { useState } from 'react';
 import './App.scss';
@@ -32,11 +33,17 @@ export const App = () => {
 
   function appLogic(goodsClon, howSort) {
     if (howSort === 'DoSortAlf') {
-      return goodsClon.sort((firts, second) => firts.localeCompare(second));
+      // eslint-disable-next-line max-len
+      return [...goodsClon].sort((firts, second) =>
+        firts.localeCompare(second),
+      );
     }
 
     if (howSort === 'sortLength') {
-      return goodsClon.sort((firts, second) => firts.length - second.length);
+      // eslint-disable-next-line max-len
+      return [...goodsClon].sort(
+        (firts, second) => firts.length - second.length,
+      );
     }
 
     if (secondClick === 0) {
@@ -117,7 +124,11 @@ export const App = () => {
 
       <ul>
         {isSortGoods.map(good => {
-          return <li data-cy="good">{good}</li>;
+          return (
+            <li key={good} data-cy="good">
+              {good}
+            </li>
+          );
         })}
       </ul>
     </div>
